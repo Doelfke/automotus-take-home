@@ -9,16 +9,8 @@ import { PageTitle } from "../core/PageTitle";
 import { useActivity, useZones } from "../hooks/useQueries";
 
 export function ActivityPage() {
-  const {
-    data: logs = [],
-    isLoading: logsLoading,
-    error: logsError,
-    refetch,
-  } = useActivity();
+  const { data: logs = [], isLoading, error, refetch } = useActivity();
   const { data: zones = [] } = useZones();
-
-  const isLoading = logsLoading;
-  const error = logsError;
 
   // For now, we'll simplify and not fetch all vehicles
   // In a real app, you might want to create a custom hook that fetches vehicles for multiple zones

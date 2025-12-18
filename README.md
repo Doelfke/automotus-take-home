@@ -4,7 +4,7 @@ A mobile-first prototype application designed to help parking enforcement office
 
 ## 🚀 Quick Start
 
-\`\`\`bash
+```bash
 
 # Install dependencies
 
@@ -16,9 +16,9 @@ npm run dev
 
 # Open in browser (mobile viewport recommended)
 
-# http://localhost:5173
+http://localhost:3000
 
-\`\`\`
+```
 
 ## 📱 Demo Instructions
 
@@ -31,33 +31,26 @@ npm run dev
 
 ### Triggering Error States for Demo
 
-There are two ways to enable error simulation:
-
-1. **URL Parameter**: Add \`?simulateError=true\` to any URL
-
-   - Example: \`http://localhost:5173/zones?simulateError=true\`
-
-2. **Toggle Switch**: On the Zones page, use the "Demo: Toggle errors" switch at the top
+**Toggle Switch**: On the Zones page, use the "Demo: Toggle errors" switch at the top
 
 When enabled, API calls have a 50% chance of failing with realistic network error messages.
 
 ## 🛠 Tech Stack
 
-| Technology                | Rationale                                                             |
-| ------------------------- | --------------------------------------------------------------------- |
-| **React 18**              | Modern component model, great ecosystem, team likely familiar         |
-| **TypeScript**            | Type safety catches bugs early, better DX with autocomplete           |
-| **Vite**                  | Fast dev server, quick HMR, simple configuration                      |
-| **React Router v6**       | De facto standard for React routing, handles mobile nav patterns well |
-| **Lucide React**          | Lightweight, consistent icons that work well at various sizes         |
-| **CSS Custom Properties** | Simple, performant styling without build complexity                   |
+| Technology          | Rationale                                                             |
+| ------------------- | --------------------------------------------------------------------- |
+| **React 18**        | Modern component model, great ecosystem, team likely familiar         |
+| **TypeScript**      | Type safety catches bugs early, better DX with autocomplete           |
+| **Vite**            | Fast dev server, quick HMR, simple configuration                      |
+| **React Router v6** | De facto standard for React routing, handles mobile nav patterns well |
+| **Lucide React**    | Lightweight, consistent icons that work well at various sizes         |
 
 ### Why Not...?
 
 - **Next.js**: Overkill for a client-side prototype; adds complexity we don't need
 - **State Management Library**: React's useState + lifting state is sufficient at this scale
 - **Component Library**: Custom CSS gives full control over mobile UX patterns
-- **CSS-in-JS**: Adds bundle size and complexity; vanilla CSS is simpler to understand
+- **CSS-in-JS**: Adds bundle size and complexity; vanilla CSS is simpler to understand. It increases re-renders and isn't compatible with SSR, if we ever need to go that route.
 
 ## 📡 API Documentation
 
@@ -71,15 +64,16 @@ The mock API simulates realistic backend behavior with:
 
 #### Zones
 
-| Endpoint                | Method | Description                        |
-| ----------------------- | ------ | ---------------------------------- |
-| \`/zones\`              | GET    | List all zones, sorted by priority |
-| \`/zones/:id\`          | GET    | Get single zone details            |
-| \`/zones/:id/vehicles\` | GET    | Get vehicles in a zone             |
-| \`/zones/:id/visit\`    | POST   | Record zone visit                  |
+| Endpoint             | Method | Description                        |
+| -------------------- | ------ | ---------------------------------- |
+| \/zones              | GET    | List all zones, sorted by priority |
+| \/zones/:id          | GET    | Get single zone details            |
+| \/zones/:id/vehicles | GET    | Get vehicles in a zone             |
+| \/zones/:id/visit    | POST   | Record zone visit                  |
 
 **GET /zones Response:**
-\`\`\`typescript
+
+```typescript
 Zone[]
 
 interface Zone {
@@ -92,10 +86,11 @@ violationCount: number;
 priority: 'high' | 'medium' | 'low';
 lastChecked: string | null; // ISO timestamp
 }
-\`\`\`
+```
 
 **GET /zones/:id/vehicles Response:**
-\`\`\`typescript
+
+```typescript
 Vehicle[]
 
 interface Vehicle {
@@ -108,18 +103,19 @@ timeLimit: number; // minutes
 isOverstay: boolean;
 warningIssued: boolean;
 }
-\`\`\`
+```
 
 #### Alerts
 
-| Endpoint                    | Method | Description                            |
-| --------------------------- | ------ | -------------------------------------- |
-| \`/alerts\`                 | GET    | Get all active (unacknowledged) alerts |
-| \`/alerts/zone/:zoneId\`    | GET    | Get alerts for specific zone           |
-| \`/alerts/:id/acknowledge\` | POST   | Acknowledge an alert                   |
+| Endpoint                | Method | Description                            |
+| ----------------------- | ------ | -------------------------------------- |
+| /alerts                 | GET    | Get all active (unacknowledged) alerts |
+| /alerts/zone/:zoneId    | GET    | Get alerts for specific zone           |
+| /alerts/:id/acknowledge | POST   | Acknowledge an alert                   |
 
 **GET /alerts Response:**
-\`\`\`typescript
+
+```typescript
 Alert[]
 
 interface Alert {
@@ -131,17 +127,19 @@ message: string;
 timestamp: string; // ISO timestamp
 acknowledged: boolean;
 }
-\`\`\`
+
+```
 
 #### Activity
 
-| Endpoint      | Method | Description                 |
-| ------------- | ------ | --------------------------- |
-| \`/activity\` | GET    | Get officer's activity logs |
-| \`/activity\` | POST   | Log new activity            |
+| Endpoint  | Method | Description                 |
+| --------- | ------ | --------------------------- |
+| /activity | GET    | Get officer's activity logs |
+| /activity | POST   | Log new activity            |
 
 **GET /activity Response:**
-\`\`\`typescript
+
+```typescript
 ActivityLog[]
 
 interface ActivityLog {
@@ -153,61 +151,31 @@ vehicleId: string | null;
 timestamp: string; // ISO timestamp
 notes: string | null;
 }
-\`\`\`
+```
 
 #### Vehicles
 
-| Endpoint                   | Method | Description               |
-| -------------------------- | ------ | ------------------------- |
-| \`/vehicles/:id/warning\`  | POST   | Issue warning to vehicle  |
-| \`/vehicles/:id/citation\` | POST   | Issue citation to vehicle |
+| Endpoint               | Method | Description               |
+| ---------------------- | ------ | ------------------------- |
+| /vehicles/:id/warning  | POST   | Issue warning to vehicle  |
+| /vehicles/:id/citation | POST   | Issue citation to vehicle |
 
 **POST /vehicles/:id/warning Request:**
-\`\`\`typescript
+
+```typescript
 {
 notes?: string;
 }
-\`\`\`
+```
 
 **Response:**
-\`\`\`typescript
+
+```typescript
 {
-vehicle: Vehicle;
-log: ActivityLog;
+  vehicle: Vehicle;
+  log: ActivityLog;
 }
-\`\`\`
-
-## 📁 Project Structure
-
-\`\`\`
-src/
-├── api/
-│ ├── index.ts # API functions (the "endpoints")
-│ ├── mockData.ts # Mock data fixtures
-│ └── config.ts # Network simulation utilities
-├── components/
-│ ├── ZoneCard.tsx # Zone list item
-│ ├── VehicleCard.tsx # Vehicle with actions
-│ ├── AlertCard.tsx # Alert with acknowledge
-│ ├── ActivityItem.tsx # Activity log entry
-│ ├── LoadingState.tsx # Spinners and skeletons
-│ ├── ErrorState.tsx # Error display with retry
-│ ├── EmptyState.tsx # Empty state display
-│ └── Toast.tsx # Toast notifications
-├── pages/
-│ ├── ZonesPage.tsx # Zone list view
-│ ├── ZoneDetailPage.tsx # Zone detail with vehicles
-│ ├── AlertsPage.tsx # Alerts list
-│ └── ActivityPage.tsx # Activity log
-├── types/
-│ └── index.ts # TypeScript interfaces
-├── utils/
-│ └── time.ts # Time formatting utilities
-├── styles/
-│ └── index.css # Global styles
-├── App.tsx # Root component with routing
-└── main.tsx # Entry point
-\`\`\`
+```
 
 ## 🎨 Design Decisions
 
@@ -219,20 +187,13 @@ src/
 - Safe area support for notched devices
 - Scannable at a glance while walking/driving
 
-### Visual Hierarchy
-
-- High-priority zones appear first with red badges
-- Violations are visually prominent with left border accents
-- Critical alerts use red, warnings use amber
-- Status badges communicate state quickly
-
 ### State Handling
 
 - **Loading**: Skeleton cards preserve layout, contextual spinners
 - **Error**: Friendly messages with retry buttons
 - **Empty**: Helpful messages ("All caught up not "No data")
 
-## 📝 Written Summary
+## Summary
 
 ### What I Prioritized and Why
 
@@ -244,6 +205,8 @@ I focused on three core features that map directly to the prompt's officer needs
 
 3. **Activity Logging** - Officers need accountability and records. Every action (zone visit, warning, citation) is logged automatically, and they can review their shift activity.
 
+4. **Module Folders** - alerts, activity, zones, etc show how we can scale the application from a folder structure perspective, making it easy for developers to easily find the code they are looking to edit.
+
 ### What I Cut and Why
 
 - **Map/GPS Integration**: Would require significant additional work and external APIs. The zone list with location text is sufficient for a prototype.
@@ -251,6 +214,8 @@ I focused on three core features that map directly to the prompt's officer needs
 - **Offline Support**: Important for production but adds significant complexity; assumes network connectivity for MVP.
 - **Search/Filter**: With 6 zones, scrolling is fine. Would add for production with more zones.
 - **Push Notifications**: Requires backend infrastructure and permissions flow.
+- **Desktop Styling**: It was outside of the scope of this project, but the current design does work on desktop resolutions to a reasonable degree.
+- **Styling** I assumed this project was more about things like architecture, so I let AI choose the styling for me. It's usable, but seemingly dated.
 
 ### Assumptions About User Needs
 
@@ -275,15 +240,10 @@ Tradeoffs:
 - **Implicit officer context**: Current officer is assumed from session. Real system would use auth tokens.
 - **Optimistic updates avoided**: I wait for API responses before updating UI. Safer but slightly slower UX.
 
-### What I'd Build Next (2-3 more hours)
+### What I'd Build Next
 
 1. **Pull-to-Refresh**: Natural mobile pattern for refreshing zone/alert lists
 2. **Vehicle Search**: Search by license plate across all zones for dispatch scenarios
 3. **Shift Summary**: End-of-shift report with statistics
 4. **Zone Navigation**: Deep link to maps app for directions
 5. **Photo Capture**: Attach photos to citations for evidence
-6. **Keyboard Shortcuts**: For officers using tablets with keyboards
-
----
-
-Built with ❤️ for Automotus

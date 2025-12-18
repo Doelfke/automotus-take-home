@@ -10,17 +10,9 @@ import { SectionHeader } from "../core/SectionHeader";
 import { useAlerts, useZones, useAcknowledgeAlert } from "../hooks/useQueries";
 
 export function AlertsPage() {
-  const {
-    data: alerts = [],
-    isLoading: alertsLoading,
-    error: alertsError,
-    refetch,
-  } = useAlerts();
+  const { data: alerts = [], isLoading, error, refetch } = useAlerts();
   const { data: zones = [] } = useZones();
   const acknowledgeMutation = useAcknowledgeAlert();
-
-  const isLoading = alertsLoading;
-  const error = alertsError;
 
   const handleAcknowledge = async (alertId: string) => {
     try {
