@@ -37,13 +37,14 @@ When enabled, API calls have a 50% chance of failing with realistic network erro
 
 ## 🛠 Tech Stack
 
-| Technology          | Rationale                                                             |
-| ------------------- | --------------------------------------------------------------------- |
-| **React 18**        | Modern component model, great ecosystem, team likely familiar         |
-| **TypeScript**      | Type safety catches bugs early, better DX with autocomplete           |
-| **Vite**            | Fast dev server, quick HMR, simple configuration                      |
-| **React Router v6** | De facto standard for React routing, handles mobile nav patterns well |
-| **Lucide React**    | Lightweight, consistent icons that work well at various sizes         |
+| Technology          | Rationale                                                                              |
+| ------------------- | -------------------------------------------------------------------------------------- |
+| **React 18**        | Modern component model, great ecosystem, team likely familiar                          |
+| **TypeScript**      | Type safety catches bugs early, better DX with autocomplete                            |
+| **Vite**            | Fast dev server, quick HMR, simple configuration                                       |
+| **React Router v6** | De facto standard for React routing, handles mobile nav patterns well                  |
+| **Lucide React**    | Lightweight, consistent icons that work well at various sizes                          |
+| **npm**             | Built in package manager, so it's easier for others to get started for this small demo |
 
 ### Why Not...?
 
