@@ -1,0 +1,68 @@
+.item {
+  display: flex;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--color-gray-100);
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.icon.zoneVisited {
+  background-color: #eff6ff;
+  color: var(--color-primary);
+}
+
+.icon.warningIssued {
+  background-color: #fffbeb;
+  color: var(--color-warning);
+}
+
+.icon.citationIssued {
+  background-color: #fef2f2;
+  color: var(--color-danger);
+}
+
+.icon.alertAcknowledged {
+  background-color: #f0fdf4;
+  color: var(--color-success);
+}
+
+.icon.noteAdded {
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-600);
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.action {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-gray-900);
+}
+
+.details {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-600);
+  margin-top: 2px;
+}
+
+.time {
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-400);
+  margin-top: var(--spacing-xs);
+}

@@ -1,0 +1,92 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AlertTriangle, Bell, MapPin, Clock, Eye } from "lucide-react";
+import type { Alert } from "../types";
+import { formatTimeAgo } from "../utils/time";
+import styles from "./AlertCard.module.css";
+import buttonStyles from "../styles/Button.module.css";
+
+interface AlertCardProps {
+  alert: Alert;
+  zoneName?: string;
+  onAcknowledge: (alertId: string) => Promise<void>;
+}
+
+export function AlertCard({ alert, zoneName, onAcknowledge }: AlertCardProps) {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getSeverityIcon = () => {
+    switch (alert.severity) {
+      case "critical":
+        return <AlertTriangle size={14} />;
+      case "warning":
+        return <Bell size={14} />;
+      default:
+        return null;
+    }
+  };
+
+  const handleAcknowledge = async () => {
+    setIsLoading(true);
+    try {
+      await onAcknowledge(alert.id);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className={`${styles.card} ${styles[alert.severity]}`}>
+      <div className={styles.content}>
+        <div className={styles.header}>
+          <span className={`${styles.severity} ${styles[alert.severity]}`}>
+            {getSeverityIcon()}
+            {alert.severity}
+          </span>
+          <span style={{ fontSize: "12px", color: "var(--color-gray-400)" }}>
+            {formatTimeAgo(alert.timestamp)}
+          </span>
+        </div>
+
+        <p className={styles.message}>{alert.message}</p>
+
+        <div className={styles.meta}>
+          {zoneName && (
+            <span>
+              <MapPin
+                size={12}
+                style={{ display: "inline", marginRight: "4px" }}
+              />
+              {zoneName}
+            </span>
+          )}
+          <span>
+            <Clock
+              size={12}
+              style={{ display: "inline", marginRight: "4px" }}
+            />
+            {formatTimeAgo(alert.timestamp)}
+          </span>
+        </div>
+
+        <div className={styles.actions}>
+          <button
+            className={`${buttonStyles.btn} ${buttonStyles.btnOutline} ${buttonStyles.btnSm} flex-1`}
+            onClick={() => navigate(`/zones/${alert.zoneId}`)}
+          >
+            <Eye size={16} />
+            View Zone
+          </button>
+          <button
+            className={`${buttonStyles.btn} ${buttonStyles.btnPrimary} ${buttonStyles.btnSm} flex-1`}
+            onClick={handleAcknowledge}
+            disabled={isLoading}
+          >
+            {isLoading ? "Acknowledging..." : "Acknowledge"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

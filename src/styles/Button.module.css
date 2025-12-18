@@ -1,0 +1,75 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.btnPrimary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background-color: var(--color-primary-dark);
+}
+
+.btnDanger {
+  background-color: var(--color-danger);
+  color: var(--color-white);
+}
+
+.btnWarning {
+  background-color: var(--color-warning);
+  color: var(--color-white);
+}
+
+.btnSuccess {
+  background-color: var(--color-success);
+  color: var(--color-white);
+}
+
+.btnOutline {
+  background-color: transparent;
+  border: 2px solid var(--color-gray-300);
+  color: var(--color-gray-700);
+}
+
+.btnOutline:hover:not(:disabled) {
+  border-color: var(--color-gray-400);
+  background-color: var(--color-gray-50);
+}
+
+.btnBlock {
+  width: 100%;
+}
+
+.btnSm {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  min-height: 36px;
+  font-size: var(--font-size-xs);
+}
+
+.btnLg {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-base);
+  min-height: 52px;
+}

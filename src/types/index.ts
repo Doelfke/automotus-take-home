@@ -7,7 +7,7 @@ export interface Zone {
   currentOccupancy: number;
   maxCapacity: number;
   violationCount: number;
-  priority: 'high' | 'medium' | 'low';
+  priority: "high" | "medium" | "low";
   lastChecked: string | null;
 }
 
@@ -15,7 +15,7 @@ export interface Vehicle {
   id: string;
   zoneId: string;
   licensePlate: string;
-  type: 'car' | 'truck' | 'motorcycle' | 'van';
+  type: "car" | "truck" | "motorcycle" | "van";
   arrivalTime: string;
   timeLimit: number; // minutes
   isOverstay: boolean;
@@ -26,7 +26,7 @@ export interface Alert {
   id: string;
   zoneId: string;
   vehicleId: string | null;
-  severity: 'critical' | 'warning' | 'info';
+  severity: "critical" | "warning" | "info";
   message: string;
   timestamp: string;
   acknowledged: boolean;
@@ -35,7 +35,12 @@ export interface Alert {
 export interface ActivityLog {
   id: string;
   officerId: string;
-  action: 'zone_visited' | 'warning_issued' | 'citation_issued' | 'note_added' | 'alert_acknowledged';
+  action:
+    | "zone_visited"
+    | "warning_issued"
+    | "citation_issued"
+    | "note_added"
+    | "alert_acknowledged";
   zoneId: string | null;
   vehicleId: string | null;
   timestamp: string;
