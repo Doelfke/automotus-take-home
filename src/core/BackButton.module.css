@@ -1,0 +1,18 @@
+.headerBack {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background: none;
+  border: none;
+  color: var(--color-gray-900);
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  padding: var(--spacing-sm);
+  margin: calc(-1 * var(--spacing-sm));
+  border-radius: var(--radius-md);
+  transition: background-color 0.2s;
+}
+
+.headerBack:active {
+  background-color: var(--color-gray-100);
+}

@@ -7,8 +7,8 @@ import {
   formatDuration,
   getOverstayMinutes,
 } from "../utils/time";
+import { Button } from "../core/Button";
 import styles from "./VehicleCard.module.css";
-import buttonStyles from "../styles/Button.module.css";
 
 interface VehicleCardProps {
   vehicle: Vehicle;
@@ -109,29 +109,35 @@ export function VehicleCard({
           <div className={styles.actions}>
             {!vehicle.warningIssued ? (
               <>
-                <button
-                  className={`${buttonStyles.btn} ${buttonStyles.btnWarning} ${buttonStyles.btnSm} flex-1`}
+                <Button
+                  variant="warning"
+                  size="sm"
+                  className="flex-1"
                   onClick={() => setShowNotes(!showNotes)}
                   disabled={isLoading !== null}
                 >
                   Issue Warning
-                </button>
-                <button
-                  className={`${buttonStyles.btn} ${buttonStyles.btnDanger} ${buttonStyles.btnSm} flex-1`}
+                </Button>
+                <Button
+                  variant="danger"
+                  size="sm"
+                  className="flex-1"
                   onClick={() => handleAction("citation")}
                   disabled={isLoading !== null}
                 >
                   {isLoading === "citation" ? "Issuing..." : "Issue Citation"}
-                </button>
+                </Button>
               </>
             ) : (
-              <button
-                className={`${buttonStyles.btn} ${buttonStyles.btnDanger} ${buttonStyles.btnSm} flex-1`}
+              <Button
+                variant="danger"
+                size="sm"
+                className="flex-1"
                 onClick={() => handleAction("citation")}
                 disabled={isLoading !== null}
               >
                 {isLoading === "citation" ? "Issuing..." : "Issue Citation"}
-              </button>
+              </Button>
             )}
           </div>
         )}
@@ -146,19 +152,23 @@ export function VehicleCard({
               rows={2}
             />
             <div className="flex gap-sm mt-md">
-              <button
-                className={`${buttonStyles.btn} ${buttonStyles.btnOutline} ${buttonStyles.btnSm} flex-1`}
+              <Button
+                variant="outline"
+                size="sm"
+                className="flex-1"
                 onClick={() => setShowNotes(false)}
               >
                 Cancel
-              </button>
-              <button
-                className={`${buttonStyles.btn} ${buttonStyles.btnWarning} ${buttonStyles.btnSm} flex-1`}
+              </Button>
+              <Button
+                variant="warning"
+                size="sm"
+                className="flex-1"
                 onClick={() => handleAction("warning")}
                 disabled={isLoading !== null}
               >
                 {isLoading === "warning" ? "Issuing..." : "Confirm Warning"}
-              </button>
+              </Button>
             </div>
           </div>
         )}

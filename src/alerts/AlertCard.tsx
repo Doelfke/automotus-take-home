@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { AlertTriangle, Bell, MapPin, Clock, Eye } from "lucide-react";
 import type { Alert } from "../types";
 import { formatTimeAgo } from "../utils/time";
+import { Button } from "../core/Button";
 import styles from "./AlertCard.module.css";
-import buttonStyles from "../styles/Button.module.css";
 
 interface AlertCardProps {
   alert: Alert;
@@ -71,20 +71,24 @@ export function AlertCard({ alert, zoneName, onAcknowledge }: AlertCardProps) {
         </div>
 
         <div className={styles.actions}>
-          <button
-            className={`${buttonStyles.btn} ${buttonStyles.btnOutline} ${buttonStyles.btnSm} flex-1`}
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex-1"
             onClick={() => navigate(`/zones/${alert.zoneId}`)}
           >
             <Eye size={16} />
             View Zone
-          </button>
-          <button
-            className={`${buttonStyles.btn} ${buttonStyles.btnPrimary} ${buttonStyles.btnSm} flex-1`}
+          </Button>
+          <Button
+            variant="primary"
+            size="sm"
+            className="flex-1"
             onClick={handleAcknowledge}
             disabled={isLoading}
           >
             {isLoading ? "Acknowledging..." : "Acknowledge"}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

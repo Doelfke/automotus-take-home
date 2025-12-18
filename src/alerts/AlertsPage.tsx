@@ -1,11 +1,13 @@
 import { Bell, CheckCircle } from "lucide-react";
-import { AlertCard } from "../components/AlertCard";
-import { SkeletonCard } from "../components/LoadingState";
-import { ErrorState } from "../components/ErrorState";
-import { EmptyState } from "../components/EmptyState";
-import { showToast } from "../components/Toast";
+import { AlertCard } from "./AlertCard";
+import { SkeletonCard } from "../core/LoadingState";
+import { ErrorState } from "../core/ErrorState";
+import { EmptyState } from "../core/EmptyState";
+import { showToast } from "../core/Toast";
+import { Page } from "../core/Page";
+import { PageTitle } from "../core/PageTitle";
+import { SectionHeader } from "../core/SectionHeader";
 import { useAlerts, useZones, useAcknowledgeAlert } from "../hooks/useQueries";
-import styles from "./Page.module.css";
 
 export function AlertsPage() {
   const {
@@ -40,12 +42,12 @@ export function AlertsPage() {
   const infoAlerts = alerts.filter((a) => a.severity === "info");
 
   return (
-    <div className={styles.page}>
+    <Page>
       <div style={{ marginBottom: "16px" }}>
-        <h1 className={styles.pageTitle}>
+        <PageTitle>
           <Bell size={24} style={{ display: "inline", marginRight: "8px" }} />
           Alerts
-        </h1>
+        </PageTitle>
         <p style={{ color: "var(--color-gray-600)", fontSize: "14px" }}>
           {alerts.length} active alert{alerts.length !== 1 ? "s" : ""}
         </p>
@@ -75,20 +77,7 @@ export function AlertsPage() {
           {/* Critical alerts first */}
           {criticalAlerts.length > 0 && (
             <>
-              <div className={styles.sectionHeader}>
-                <h2 className={`${styles.sectionTitle} text-danger`}>
-                  Critical
-                </h2>
-                <span
-                  className={styles.sectionCount}
-                  style={{
-                    backgroundColor: "#fef2f2",
-                    color: "var(--color-danger)",
-                  }}
-                >
-                  {criticalAlerts.length}
-                </span>
-              </div>
+              <SectionHeader title="Critical" count={criticalAlerts.length} />
               {criticalAlerts.map((alert) => (
                 <AlertCard
                   key={alert.id}
@@ -103,20 +92,7 @@ export function AlertsPage() {
           {/* Warning alerts */}
           {warningAlerts.length > 0 && (
             <>
-              <div className={styles.sectionHeader}>
-                <h2 className={`${styles.sectionTitle} text-warning`}>
-                  Warnings
-                </h2>
-                <span
-                  className={styles.sectionCount}
-                  style={{
-                    backgroundColor: "#fffbeb",
-                    color: "var(--color-warning)",
-                  }}
-                >
-                  {warningAlerts.length}
-                </span>
-              </div>
+              <SectionHeader title="Warnings" count={warningAlerts.length} />
               {warningAlerts.map((alert) => (
                 <AlertCard
                   key={alert.id}
@@ -131,10 +107,7 @@ export function AlertsPage() {
           {/* Info alerts */}
           {infoAlerts.length > 0 && (
             <>
-              <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>Info</h2>
-                <span className={styles.sectionCount}>{infoAlerts.length}</span>
-              </div>
+              <SectionHeader title="Info" count={infoAlerts.length} />
               {infoAlerts.map((alert) => (
                 <AlertCard
                   key={alert.id}
@@ -147,6 +120,6 @@ export function AlertsPage() {
           )}
         </>
       )}
-    </div>
+    </Page>
   );
 }

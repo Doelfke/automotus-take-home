@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, MapPin, Car, CheckCircle } from "lucide-react";
-import { VehicleCard } from "../components/VehicleCard";
-import { AlertCard } from "../components/AlertCard";
-import { VehicleCardSkeleton } from "../components/LoadingState";
-import { ErrorState } from "../components/ErrorState";
-import { EmptyState } from "../components/EmptyState";
-import { showToast } from "../components/Toast";
+import { MapPin, Car, CheckCircle } from "lucide-react";
+import { VehicleCard } from "./VehicleCard";
+import { AlertCard } from "../alerts/AlertCard";
+import { VehicleCardSkeleton } from "../core/LoadingState";
+import { ErrorState } from "../core/ErrorState";
+import { EmptyState } from "../core/EmptyState";
+import { showToast } from "../core/Toast";
+import { Button } from "../core/Button";
+import { Page } from "../core/Page";
+import { PageTitle } from "../core/PageTitle";
+import { BackButton } from "../core/BackButton";
+import { SectionHeader } from "../core/SectionHeader";
 import {
   useZone,
   useVehicles,
@@ -16,9 +21,7 @@ import {
   useIssueCitation,
   useAcknowledgeAlert,
 } from "../hooks/useQueries";
-import pageStyles from "./Page.module.css";
 import styles from "./ZoneDetailPage.module.css";
-import buttonStyles from "../styles/Button.module.css";
 
 type TabType = "vehicles" | "alerts";
 
@@ -99,34 +102,22 @@ export function ZoneDetailPage() {
 
   if (isLoading) {
     return (
-      <div className={pageStyles.page}>
+      <Page>
         <div style={{ marginBottom: "16px" }}>
-          <button
-            className={pageStyles.headerBack}
-            onClick={() => navigate("/zones")}
-          >
-            <ArrowLeft size={20} />
-            Back
-          </button>
+          <BackButton onClick={() => navigate("/zones")} />
         </div>
         <VehicleCardSkeleton />
         <VehicleCardSkeleton />
         <VehicleCardSkeleton />
-      </div>
+      </Page>
     );
   }
 
   if (error || !zone) {
     return (
-      <div className={pageStyles.page}>
+      <Page>
         <div style={{ marginBottom: "16px" }}>
-          <button
-            className={pageStyles.headerBack}
-            onClick={() => navigate("/zones")}
-          >
-            <ArrowLeft size={20} />
-            Back
-          </button>
+          <BackButton onClick={() => navigate("/zones")} />
         </div>
         <ErrorState
           message={
@@ -134,28 +125,20 @@ export function ZoneDetailPage() {
           }
           onRetry={() => refetchZone()}
         />
-      </div>
+      </Page>
     );
   }
 
   return (
-    <div className={pageStyles.page}>
+    <Page>
       {/* Header */}
       <div style={{ marginBottom: "16px" }}>
-        <button
-          className={pageStyles.headerBack}
-          onClick={() => navigate("/zones")}
-        >
-          <ArrowLeft size={20} />
-          Back to Zones
-        </button>
+        <BackButton onClick={() => navigate("/zones")} label="Back to Zones" />
       </div>
 
       {/* Zone Info */}
       <div className={styles.zoneDetailHeader}>
-        <h1 className={pageStyles.pageTitle} style={{ marginBottom: "4px" }}>
-          {zone.name}
-        </h1>
+        <PageTitle>{zone.name}</PageTitle>
         <p style={{ color: "var(--color-gray-500)", fontSize: "14px" }}>
           <MapPin size={14} style={{ display: "inline", marginRight: "4px" }} />
           {zone.location}
@@ -180,14 +163,16 @@ export function ZoneDetailPage() {
           </div>
         </div>
 
-        <button
-          className={`${buttonStyles.btn} ${buttonStyles.btnSuccess} ${buttonStyles.btnBlock} mt-md`}
+        <Button
+          variant="success"
+          block
+          className="mt-md"
           onClick={handleMarkVisit}
           disabled={visitZoneMutation.isPending}
         >
           <CheckCircle size={18} />
           {visitZoneMutation.isPending ? "Logging..." : "Mark Zone as Visited"}
-        </button>
+        </Button>
       </div>
 
       {/* Tabs */}
@@ -224,12 +209,10 @@ export function ZoneDetailPage() {
               {/* Overstay vehicles first */}
               {overstayVehicles.length > 0 && (
                 <>
-                  <div className={pageStyles.sectionHeader}>
-                    <h2 className={pageStyles.sectionTitle}>Violations</h2>
-                    <span className={pageStyles.sectionCount}>
-                      {overstayVehicles.length}
-                    </span>
-                  </div>
+                  <SectionHeader
+                    title="Violations"
+                    count={overstayVehicles.length}
+                  />
                   {overstayVehicles.map((vehicle) => (
                     <VehicleCard
                       key={vehicle.id}
@@ -244,12 +227,7 @@ export function ZoneDetailPage() {
               {/* OK vehicles */}
               {okVehicles.length > 0 && (
                 <>
-                  <div className={pageStyles.sectionHeader}>
-                    <h2 className={pageStyles.sectionTitle}>Compliant</h2>
-                    <span className={pageStyles.sectionCount}>
-                      {okVehicles.length}
-                    </span>
-                  </div>
+                  <SectionHeader title="Compliant" count={okVehicles.length} />
                   {okVehicles.map((vehicle) => (
                     <VehicleCard
                       key={vehicle.id}
@@ -283,6 +261,6 @@ export function ZoneDetailPage() {
           )}
         </>
       )}
-    </div>
+    </Page>
   );
 }

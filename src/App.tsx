@@ -1,19 +1,15 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-  NavLink,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { MapPin, Bell, ClipboardList } from "lucide-react";
-import { ZonesPage } from "./pages/ZonesPage";
-import { ZoneDetailPage } from "./pages/ZoneDetailPage";
-import { AlertsPage } from "./pages/AlertsPage";
-import { ActivityPage } from "./pages/ActivityPage";
-import { Toast } from "./components/Toast";
+import { ZonesPage } from "./zones/ZonesPage";
+import { ZoneDetailPage } from "./zones/ZoneDetailPage";
+import { AlertsPage } from "./alerts/AlertsPage";
+import { ActivityPage } from "./activity/ActivityPage";
+import { Toast } from "./core/Toast";
+import { Header } from "./core/Header";
+import { BottomNav, NavItem } from "./core/BottomNav";
 import { useOfficer, useAlerts } from "./hooks/useQueries";
 import { useEffect } from "react";
-import "./styles/global.css";
+import "./global.css";
 import styles from "./App.module.css";
 
 function AppContent() {
@@ -38,16 +34,10 @@ function AppContent() {
   return (
     <div className={styles.app}>
       {/* Header */}
-      <header className={styles.header}>
-        <div className={styles.headerContent}>
-          <div>
-            <h1 className={styles.headerTitle}>ParkPatrol</h1>
-            <p className={styles.headerSubtitle}>
-              {officer.name} • #{officer.badgeNumber}
-            </p>
-          </div>
-        </div>
-      </header>
+      <Header
+        title="ParkPatrol"
+        subtitle={`${officer.name} • #${officer.badgeNumber}`}
+      />
 
       {/* Main Content */}
       <main className={styles.appContent}>
@@ -61,40 +51,20 @@ function AppContent() {
       </main>
 
       {/* Bottom Navigation */}
-      <nav className={styles.bottomNav}>
-        <NavLink
-          to="/zones"
-          className={({ isActive }) =>
-            `${styles.navItem} ${isActive ? styles.active : ""}`
-          }
-        >
-          <MapPin size={24} />
-          <span>Zones</span>
-        </NavLink>
-        <NavLink
+      <BottomNav>
+        <NavItem to="/zones" icon={<MapPin size={24} />} label="Zones" />
+        <NavItem
           to="/alerts"
-          className={({ isActive }) =>
-            `${styles.navItem} ${isActive ? styles.active : ""}`
-          }
-        >
-          <div className={styles.navIconWrapper}>
-            <Bell size={24} />
-            {alertCount > 0 && (
-              <span className={styles.navBadge}>{alertCount}</span>
-            )}
-          </div>
-          <span>Alerts</span>
-        </NavLink>
-        <NavLink
+          icon={<Bell size={24} />}
+          label="Alerts"
+          badge={alertCount}
+        />
+        <NavItem
           to="/activity"
-          className={({ isActive }) =>
-            `${styles.navItem} ${isActive ? styles.active : ""}`
-          }
-        >
-          <ClipboardList size={24} />
-          <span>Activity</span>
-        </NavLink>
-      </nav>
+          icon={<ClipboardList size={24} />}
+          label="Activity"
+        />
+      </BottomNav>
 
       {/* Toast notifications */}
       <Toast />

@@ -1,6 +1,6 @@
 import { AlertCircle, RefreshCw } from "lucide-react";
 import styles from "./ErrorState.module.css";
-import buttonStyles from "../styles/Button.module.css";
+import { Button } from "./Button";
 
 interface ErrorStateProps {
   title?: string;
@@ -19,13 +19,10 @@ export function ErrorState({
       <h3 className={styles.errorTitle}>{title}</h3>
       <p className={styles.errorMessage}>{message}</p>
       {onRetry && (
-        <button
-          className={`${buttonStyles.btn} ${buttonStyles.btnPrimary}`}
-          onClick={onRetry}
-        >
+        <Button variant="primary" onClick={onRetry}>
           <RefreshCw size={18} />
           Try Again
-        </button>
+        </Button>
       )}
     </div>
   );

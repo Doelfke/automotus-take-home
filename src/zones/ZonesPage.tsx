@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { MapPinOff } from "lucide-react";
 import { setSimulateErrors, getSimulateErrors } from "../api/config";
-import { ZoneCard } from "../components/ZoneCard";
-import { ZoneCardSkeleton } from "../components/LoadingState";
-import { ErrorState } from "../components/ErrorState";
-import { EmptyState } from "../components/EmptyState";
+import { ZoneCard } from "./ZoneCard";
+import { ZoneCardSkeleton } from "../core/LoadingState";
+import { ErrorState } from "../core/ErrorState";
+import { EmptyState } from "../core/EmptyState";
+import { Page } from "../core/Page";
+import { PageTitle } from "../core/PageTitle";
 import { useZones } from "../hooks/useQueries";
-import styles from "./Page.module.css";
+import styles from "./ZonesPage.module.css";
 
 export function ZonesPage() {
   const queryClient = useQueryClient();
@@ -29,7 +31,7 @@ export function ZonesPage() {
   const totalViolations = zones.reduce((sum, z) => sum + z.violationCount, 0);
 
   return (
-    <div className={styles.page}>
+    <Page>
       {/* Error simulation toggle for demo */}
       <div className={styles.errorDemoBanner}>
         <span className={styles.errorDemoText}>
@@ -49,7 +51,7 @@ export function ZonesPage() {
 
       {/* Summary */}
       <div style={{ marginBottom: "16px" }}>
-        <h1 className={styles.pageTitle}>Patrol Zones</h1>
+        <PageTitle>Patrol Zones</PageTitle>
         <p style={{ color: "var(--color-gray-600)", fontSize: "14px" }}>
           {highPriorityCount} high priority • {totalViolations} total violations
         </p>
@@ -78,6 +80,6 @@ export function ZonesPage() {
       ) : (
         zones.map((zone) => <ZoneCard key={zone.id} zone={zone} />)
       )}
-    </div>
+    </Page>
   );
 }

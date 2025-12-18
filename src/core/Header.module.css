@@ -1,0 +1,27 @@
+.header {
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--spacing-md);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-md);
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.headerTitle {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+.headerSubtitle {
+  font-size: var(--font-size-xs);
+  opacity: 0.9;
+}

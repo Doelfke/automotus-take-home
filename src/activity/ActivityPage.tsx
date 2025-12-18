@@ -1,11 +1,12 @@
 import { ClipboardList, Inbox } from "lucide-react";
-import { ActivityItem } from "../components/ActivityItem";
-import { SkeletonCard } from "../components/LoadingState";
-import { ErrorState } from "../components/ErrorState";
-import { EmptyState } from "../components/EmptyState";
+import { ActivityItem } from "./ActivityItem";
+import { SkeletonCard } from "../core/LoadingState";
+import { ErrorState } from "../core/ErrorState";
+import { EmptyState } from "../core/EmptyState";
+import { Card } from "../core/Card";
+import { Page } from "../core/Page";
+import { PageTitle } from "../core/PageTitle";
 import { useActivity, useZones } from "../hooks/useQueries";
-import styles from "./Page.module.css";
-import cardStyles from "../styles/Card.module.css";
 
 export function ActivityPage() {
   const {
@@ -36,15 +37,15 @@ export function ActivityPage() {
   };
 
   return (
-    <div className={styles.page}>
+    <Page>
       <div style={{ marginBottom: "16px" }}>
-        <h1 className={styles.pageTitle}>
+        <PageTitle>
           <ClipboardList
             size={24}
             style={{ display: "inline", marginRight: "8px" }}
           />
           Activity Log
-        </h1>
+        </PageTitle>
         <p style={{ color: "var(--color-gray-600)", fontSize: "14px" }}>
           Your recent patrol activity
         </p>
@@ -71,7 +72,7 @@ export function ActivityPage() {
           message="Start patrolling zones to see your activity history here."
         />
       ) : (
-        <div className={cardStyles.card}>
+        <Card>
           {logs.map((log) => (
             <ActivityItem
               key={log.id}
@@ -80,8 +81,8 @@ export function ActivityPage() {
               vehiclePlate={getVehiclePlate(log.vehicleId)}
             />
           ))}
-        </div>
+        </Card>
       )}
-    </div>
+    </Page>
   );
 }
