@@ -4,10 +4,10 @@ import { SkeletonCard } from "../core/LoadingState";
 import { ErrorState } from "../core/ErrorState";
 import { EmptyState } from "../core/EmptyState";
 import { showToast } from "../core/Toast";
-import { Page } from "../core/Page";
+import { Page } from "../core/layout/Page";
 import { PageTitle } from "../core/PageTitle";
 import { SectionHeader } from "../core/SectionHeader";
-import { useAlerts, useZones, useAcknowledgeAlert } from "../hooks/useQueries";
+import { useAlerts, useZones, useAcknowledgeAlert } from "../api/useQueries";
 
 export function AlertsPage() {
   const { data: alerts = [], isLoading, error, refetch } = useAlerts();

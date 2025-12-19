@@ -6,9 +6,9 @@ import { ZoneCard } from "./ZoneCard";
 import { ZoneCardSkeleton } from "../core/LoadingState";
 import { ErrorState } from "../core/ErrorState";
 import { EmptyState } from "../core/EmptyState";
-import { Page } from "../core/Page";
+import { Page } from "../core/layout/Page";
 import { PageTitle } from "../core/PageTitle";
-import { useZones } from "../hooks/useQueries";
+import { useZones } from "../api/useQueries";
 import styles from "./ZonesPage.module.css";
 
 export function ZonesPage() {

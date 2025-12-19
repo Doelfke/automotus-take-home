@@ -4,9 +4,9 @@ import { SkeletonCard } from "../core/LoadingState";
 import { ErrorState } from "../core/ErrorState";
 import { EmptyState } from "../core/EmptyState";
 import { Card } from "../core/Card";
-import { Page } from "../core/Page";
+import { Page } from "../core/layout/Page";
 import { PageTitle } from "../core/PageTitle";
-import { useActivity, useZones } from "../hooks/useQueries";
+import { useActivity, useZones } from "../api/useQueries";
 
 export function ActivityPage() {
   const { data: logs = [], isLoading, error, refetch } = useActivity();

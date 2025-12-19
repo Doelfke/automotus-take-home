@@ -1,6 +1,6 @@
 import { AlertCircle, RefreshCw } from "lucide-react";
 import styles from "./ErrorState.module.css";
-import { Button } from "./Button";
+import { Button } from "./buttons/Button";
 
 interface ErrorStateProps {
   title?: string;

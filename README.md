@@ -45,6 +45,7 @@ When enabled, API calls have a 50% chance of failing with realistic network erro
 | **React Router v6** | De facto standard for React routing, handles mobile nav patterns well                  |
 | **Lucide React**    | Lightweight, consistent icons that work well at various sizes                          |
 | **npm**             | Built in package manager, so it's easier for others to get started for this small demo |
+| **react-query**     | A powerful and popular library to manage api requests                                  |
 
 ### Why Not...?
 

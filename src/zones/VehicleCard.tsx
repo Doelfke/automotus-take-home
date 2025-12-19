@@ -7,7 +7,7 @@ import {
   formatDuration,
   getOverstayMinutes,
 } from "../utils/time";
-import { Button } from "../core/Button";
+import { Button } from "../core/buttons/Button";
 import styles from "./VehicleCard.module.css";
 
 interface VehicleCardProps {

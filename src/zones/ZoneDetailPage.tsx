@@ -7,10 +7,10 @@ import { VehicleCardSkeleton } from "../core/LoadingState";
 import { ErrorState } from "../core/ErrorState";
 import { EmptyState } from "../core/EmptyState";
 import { showToast } from "../core/Toast";
-import { Button } from "../core/Button";
-import { Page } from "../core/Page";
+import { Button } from "../core/buttons/Button";
+import { Page } from "../core/layout/Page";
 import { PageTitle } from "../core/PageTitle";
-import { BackButton } from "../core/BackButton";
+import { BackButton } from "../core/buttons/BackButton";
 import { SectionHeader } from "../core/SectionHeader";
 import {
   useZone,
@@ -20,7 +20,7 @@ import {
   useIssueWarning,
   useIssueCitation,
   useAcknowledgeAlert,
-} from "../hooks/useQueries";
+} from "../api/useQueries";
 import styles from "./ZoneDetailPage.module.css";
 
 type TabType = "vehicles" | "alerts";
