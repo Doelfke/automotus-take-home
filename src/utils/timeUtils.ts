@@ -1,7 +1,7 @@
 /**
  * Formats a timestamp into a human-readable relative time string
  */
-export function formatTimeAgo(timestamp: string): string {
+function formatTimeAgo(timestamp: string): string {
   const now = Date.now();
   const then = new Date(timestamp).getTime();
   const diffMs = now - then;
@@ -17,7 +17,7 @@ export function formatTimeAgo(timestamp: string): string {
 /**
  * Formats a timestamp into a time string (e.g., "2:30 PM")
  */
-export function formatTime(timestamp: string): string {
+function formatTime(timestamp: string): string {
   return new Date(timestamp).toLocaleTimeString("en-US", {
     hour: "numeric",
     minute: "2-digit",
@@ -28,7 +28,7 @@ export function formatTime(timestamp: string): string {
 /**
  * Calculates the duration in minutes from a timestamp to now
  */
-export function getMinutesSince(timestamp: string): number {
+function getMinutesSince(timestamp: string): number {
   const now = Date.now();
   const then = new Date(timestamp).getTime();
   return Math.floor((now - then) / (1000 * 60));
@@ -37,7 +37,7 @@ export function getMinutesSince(timestamp: string): number {
 /**
  * Formats a duration in minutes to a human-readable string
  */
-export function formatDuration(minutes: number): string {
+function formatDuration(minutes: number): string {
   if (minutes < 60) return `${minutes}m`;
   const hours = Math.floor(minutes / 60);
   const mins = minutes % 60;
@@ -47,11 +47,16 @@ export function formatDuration(minutes: number): string {
 /**
  * Calculates overstay duration in minutes (returns 0 if not overstayed)
  */
-export function getOverstayMinutes(
-  arrivalTime: string,
-  timeLimit: number
-): number {
+function getOverstayMinutes(arrivalTime: string, timeLimit: number): number {
   const parkedMinutes = getMinutesSince(arrivalTime);
   const overstay = parkedMinutes - timeLimit;
   return overstay > 0 ? overstay : 0;
 }
+
+export const timeUtils = {
+  formatTimeAgo,
+  formatTime,
+  getMinutesSince,
+  formatDuration,
+  getOverstayMinutes,
+};

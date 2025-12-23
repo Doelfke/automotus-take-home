@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { MapPin, Clock, AlertTriangle } from "lucide-react";
 import type { Zone } from "../types";
-import { formatTimeAgo } from "../utils/time";
+import { timeUtils } from "../utils/timeUtils";
 import styles from "./ZoneCard.module.css";
 
 interface ZoneCardProps {
@@ -79,7 +79,7 @@ export function ZoneCard({ zone }: ZoneCardProps) {
           <Clock size={14} />
           <span>
             {zone.lastChecked
-              ? `Checked ${formatTimeAgo(zone.lastChecked)}`
+              ? `Checked ${timeUtils.formatTimeAgo(zone.lastChecked)}`
               : "Not checked today"}
           </span>
         </div>

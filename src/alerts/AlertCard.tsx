@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AlertTriangle, Bell, MapPin, Clock, Eye } from "lucide-react";
 import type { Alert } from "../types";
-import { formatTimeAgo } from "../utils/time";
+import { timeUtils } from "../utils/timeUtils";
 import { Button } from "../core/buttons/Button";
 import styles from "./AlertCard.module.css";
 
@@ -45,7 +45,7 @@ export function AlertCard({ alert, zoneName, onAcknowledge }: AlertCardProps) {
             {alert.severity}
           </span>
           <span style={{ fontSize: "12px", color: "var(--color-gray-400)" }}>
-            {formatTimeAgo(alert.timestamp)}
+            {timeUtils.formatTimeAgo(alert.timestamp)}
           </span>
         </div>
 
@@ -66,7 +66,7 @@ export function AlertCard({ alert, zoneName, onAcknowledge }: AlertCardProps) {
               size={12}
               style={{ display: "inline", marginRight: "4px" }}
             />
-            {formatTimeAgo(alert.timestamp)}
+            {timeUtils.formatTimeAgo(alert.timestamp)}
           </span>
         </div>
 

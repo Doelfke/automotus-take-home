@@ -1,12 +1,7 @@
 import { useState } from "react";
 import { Car, Truck, Clock, AlertTriangle, CheckCircle } from "lucide-react";
 import type { Vehicle } from "../types";
-import {
-  formatTime,
-  getMinutesSince,
-  formatDuration,
-  getOverstayMinutes,
-} from "../utils/time";
+import { timeUtils } from "../utils/timeUtils";
 import { Button } from "../core/buttons/Button";
 import styles from "./VehicleCard.module.css";
 
@@ -27,8 +22,8 @@ export function VehicleCard({
   const [showNotes, setShowNotes] = useState(false);
   const [notes, setNotes] = useState("");
 
-  const parkedMinutes = getMinutesSince(vehicle.arrivalTime);
-  const overstayMinutes = getOverstayMinutes(
+  const parkedMinutes = timeUtils.getMinutesSince(vehicle.arrivalTime);
+  const overstayMinutes = timeUtils.getOverstayMinutes(
     vehicle.arrivalTime,
     vehicle.timeLimit
   );
@@ -94,12 +89,12 @@ export function VehicleCard({
         <div className={styles.time}>
           <Clock size={16} />
           <span>
-            Arrived {formatTime(vehicle.arrivalTime)} • Parked{" "}
-            {formatDuration(parkedMinutes)}
+            Arrived {timeUtils.formatTime(vehicle.arrivalTime)} • Parked{" "}
+            {timeUtils.formatDuration(parkedMinutes)}
             {vehicle.isOverstay && (
               <span className="text-danger">
                 {" "}
-                • Over by {formatDuration(overstayMinutes)}
+                • Over by {timeUtils.formatDuration(overstayMinutes)}
               </span>
             )}
           </span>

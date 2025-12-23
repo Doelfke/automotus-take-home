@@ -6,7 +6,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 import type { ActivityLog } from "../types";
-import { formatTimeAgo } from "../utils/time";
+import { timeUtils } from "../utils/timeUtils";
 import styles from "./ActivityItem.module.css";
 
 interface ActivityItemProps {
@@ -79,7 +79,9 @@ export function ActivityItem({
           {config.detail}
           {log.notes && <span> — {log.notes}</span>}
         </div>
-        <div className={styles.time}>{formatTimeAgo(log.timestamp)}</div>
+        <div className={styles.time}>
+          {timeUtils.formatTimeAgo(log.timestamp)}
+        </div>
       </div>
     </div>
   );
