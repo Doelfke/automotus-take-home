@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Car, Truck, Clock, AlertTriangle, CheckCircle } from "lucide-react";
 import type { Vehicle } from "../types";
-import { timeUtils } from "../utils/timeUtils";
+import { timeUtils } from "../core/timeUtils";
 import { Button } from "../core/buttons/Button";
 import styles from "./VehicleCard.module.css";
 

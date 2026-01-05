@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { MapPin, Clock, AlertTriangle } from "lucide-react";
 import type { Zone } from "../types";
-import { timeUtils } from "../utils/timeUtils";
+import { timeUtils } from "../core/timeUtils";
 import styles from "./ZoneCard.module.css";
 
 interface ZoneCardProps {

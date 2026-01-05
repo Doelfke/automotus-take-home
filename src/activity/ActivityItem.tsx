@@ -6,7 +6,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 import type { ActivityLog } from "../types";
-import { timeUtils } from "../utils/timeUtils";
+import { timeUtils } from "../core/timeUtils";
 import styles from "./ActivityItem.module.css";
 
 interface ActivityItemProps {

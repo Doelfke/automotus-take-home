@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AlertTriangle, Bell, MapPin, Clock, Eye } from "lucide-react";
 import type { Alert } from "../types";
-import { timeUtils } from "../utils/timeUtils";
+import { timeUtils } from "../core/timeUtils";
 import { Button } from "../core/buttons/Button";
 import styles from "./AlertCard.module.css";
 
