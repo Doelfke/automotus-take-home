@@ -4,20 +4,45 @@ A mobile-first prototype application designed to help parking enforcement office
 
 ## 🚀 Quick Start
 
+### Option 1: Docker (Recommended)
+
 ```bash
+# Build and run with Docker Compose
+docker-compose up
 
+# Open in browser (mobile viewport recommended)
+http://localhost:3000
+```
+
+That's it! No need to install Node.js or dependencies - everything runs in the container.
+
+### Option 2: Local Development
+
+```bash
 # Install dependencies
-
 npm install
 
 # Start development server
-
 npm run dev
 
 # Open in browser (mobile viewport recommended)
-
 http://localhost:3000
+```
 
+### Docker Commands
+
+```bash
+# Build and start in detached mode (runs in background)
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop the container
+docker-compose down
+
+# Rebuild after making changes to package.json
+docker-compose up --build
 ```
 
 ## 📱 Demo Instructions
